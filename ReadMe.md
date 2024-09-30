@@ -1,17 +1,9 @@
-# CMSC 455 Assignment #2
+# CMSC 455 Assignment #2 - Adonias Daniel
 
-## Product Service
-URL: 'https://product-service-PLACEHOLDER.onrender.com'
+  ## Product Service
+  URL: 'https://product-service-qwwm.onrender.com'
 
-## Cart Service
-URL: 'https://cart-service-PLACEHOLDER.onrender.com'
+  ## Cart Service
+  URL: 'https://cart-service-yol9.onrender.com'
 
-### Endpoints:
-- **Product Service:**
-  - `/products` (GET, POST)
-  - `/products/<product_id>` (GET)
 
-- **Cart Service:**
-  - `/cart/<user_id>` (GET)
-  - `/cart/<user_id>/add/<product_id>` (POST)
-  - `/cart/<user_id>/remove/<product_id>` (POST)

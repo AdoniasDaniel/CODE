@@ -1,3 +1,4 @@
+# CMSC 455 Assignment #2 - Adonias Daniel
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -30,7 +31,7 @@ def get_product(product_id):
     product = next((product for product in memory if product['id'] == product_id), None)
     if product:
         return jsonify(product)  # Return the product if found
-    return jsonify({'error': 'Product not found'}), 404
+    return jsonify({'ERROR': 'PRODUCT NOT FOUND'}), 404
 
 # Run the app
 if __name__ == '__main__':

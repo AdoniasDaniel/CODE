@@ -5,7 +5,7 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 
 # Link to product service on Render
-PRODUCT_SERVICE_URL = 'https://product-service-qwwm.onrender.com'
+PRODUCT_SERVICE_URL = 'https://product-service-bfhr.onrender.com'
 
 # In-memory cart storage
 memory = {}

@@ -1,3 +1,4 @@
+# CMSC 455 Assignment #2 - Adonias Daniel
 import requests
 from flask import Flask, jsonify, request
 
@@ -21,7 +22,7 @@ def get_cart(user_id):
             
             # Check if the request was successful
             if response.status_code != 200:
-                return jsonify({"error": f"Failed to retrieve product details for product ID {item['product_id']}"}), response.status_code
+                return jsonify({"ERROR": f"FAILED TO GET PRODUCT {item['product_id']}"}), response.status_code
             
             # Parse the product details as JSON
             product = response.json()
@@ -33,9 +34,9 @@ def get_cart(user_id):
                 'total_price': product['price'] * item['quantity']
             })
         except requests.exceptions.RequestException as e:
-            return jsonify({"error": f"Error communicating with Product Service: {str(e)}"}), 500
+            return jsonify({"ERROR": f"PRODUCT SERVICE ERROR: {str(e)}"}), 500
         except ValueError:
-            return jsonify({"error": f"Invalid response from Product Service for product ID {item['product_id']}"}), 500
+            return jsonify({"ERROR": f"INVALID RESPONSE FOR {item['product_id']}"}), 500
     return jsonify(result)
 
 
@@ -46,10 +47,10 @@ def add_to_cart(user_id, product_id):
     for item in cart_items:
         if item['product_id'] == product_id:
             item['quantity'] += 1  # Increment quantity if already in cart
-            return jsonify({"message": f"PRODUCT ID#: {product_id} QUANTITY UPDATED IN CART!"}), 201
+            return jsonify({"MSG": f"PRODUCT ID#: {product_id} UPDATED IN CART!"}), 201
     # Add new item to cart
     cart_items.append({'product_id': product_id, 'quantity': 1})
-    return jsonify({"message": f"PRODUCT ID#: {product_id} WAS SUCCESSFULLY ADDED TO CART!"}), 201
+    return jsonify({"MSG": f"PRODUCT ID#: {product_id} ADDED TO CART!"}), 201
 
 # Remove product from cart for a user
 @app.route('/cart/<user_id>/remove/<int:product_id>', methods=['POST'])
@@ -61,9 +62,10 @@ def remove_from_cart(user_id, product_id):
                 item['quantity'] -= 1  # Decrease quantity if more than one
             else:
                 cart_items.remove(item)  # Remove item if quantity is one
-            return jsonify({"message": f"PRODUCT ID#: {product_id} QUANTITY UPDATED/REMOVED FROM CART!"}), 200
-    return jsonify({"error": "Item not found in cart"}), 404
+            return jsonify({"MSG": f"PRODUCT ID#: {product_id} REMOVED FROM CART!"}), 200
+    return jsonify({"ERROR": "NOT FOUND IN CART"}), 404
 
 # Run the cart app
 if __name__ == '__main__':
+    app.run(port=5001, debug=True)
     app.run(port=5001, debug=True)
